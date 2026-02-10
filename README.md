@@ -44,6 +44,34 @@ A modern, high-tech internship enrollment platform with premium dark/light mode 
     ```
     Visit `http://localhost:3000` in your browser.
 
+## 🚀 Deployment (Production)
+
+To deploy to a production server automatically:
+
+1.  **Setup PM2** (Process Manager):
+    ```bash
+    npm install -g pm2
+    ```
+
+2.  **Initialize the deployment script**:
+    Make the script executable:
+    ```bash
+    chmod +x deploy.sh
+    ```
+
+3.  **CI/CD with GitHub Actions**:
+    - The repository includes a `.github/workflows/deploy.yml`.
+    - Set the following **Secrets** in your GitHub repository (`Settings > Secrets and variables > Actions`):
+        - `SERVER_HOST`: Your server's IP address.
+        - `SERVER_USER`: Your SSH username (e.g., `root` or `ubuntu`).
+        - `SERVER_SSH_KEY`: Your private SSH key.
+
+4.  **Manual Deployment**:
+    You can also run the script manually on the server:
+    ```bash
+    ./deploy.sh
+    ```
+
 ## 📝 Notion Database Schema
 
 Ensure your Notion database has the following properties:
