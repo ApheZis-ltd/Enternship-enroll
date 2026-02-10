@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+
+# Debugging & Diagnostic Scripts
+check-notion.js
+setup-database.js
+test-minimal.js
+repair-database.js
+test-full.js
+search-db.js
+setup-db-v2.js
+setup-inline-db.js
+final-setup.js
+
+# OS Files
+.DS_Store
+Thmubs.db
