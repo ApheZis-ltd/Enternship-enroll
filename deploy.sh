@@ -1,40 +1,40 @@
 #!/bin/bash
+# 🚀 PERMANENT DEPLOYMENT SCRIPT
+# This forces server to match GitHub exactly
 
-echo "🚀 Starting full deployment..."
+echo "🚀 Starting deployment..."
 
-APP_DIR="/var/www/enternship-enroll"
-cd "$APP_DIR" || exit 1
+cd /var/www/enternship-enroll || { echo "❌ Cannot enter directory"; exit 1; }
 
-# 1. Pull ALL files from GitHub
-echo "📥 Pulling all files from GitHub..."
-git fetch origin
+# 1. Stop app
+echo "🛑 Stopping application..."
+pm2 delete enternship-enroll 2>/dev/null || true
+
+# 2. Force sync with GitHub
+echo "🔄 Force syncing with GitHub..."
+git fetch origin --force
 git reset --hard origin/master
-
-# 2. Ensure public folder exists and has correct files
-echo "📁 Ensuring public folder is up to date..."
-if [ -d "public" ]; then
-    # Check if public folder is tracked in git
-    if git ls-tree --name-only HEAD | grep -q "^public/"; then
-        echo "✅ Public folder is tracked in git, pulling latest..."
-        git checkout origin/master -- public/
-    else
-        echo "⚠️ Public folder not in git, checking for updates..."
-        # If you have a frontend build process, add it here
-        # npm run build
-    fi
-fi
+git clean -fdx
 
 # 3. Install dependencies
 echo "📦 Installing dependencies..."
 npm ci --only=production --no-audit
 
-# 4. Restart app
-echo "♻️ Restarting application..."
-pm2 delete enternship-enroll 2>/dev/null || true
+# 4. Start app
+echo "♻️ Starting application..."
 pm2 start server/server.js --name enternship-enroll
 
 # 5. Verify
-sleep 2
-echo "✅ Deployment complete!"
-echo "📊 Status:"
-pm2 status enternship-enroll
+echo "✅ Verifying deployment..."
+sleep 3
+
+if curl -s -f http://localhost:3000 > /dev/null; then
+    echo "🎉 Deployment successful!"
+    echo "📊 Status:"
+    pm2 status enternship-enroll
+    echo "📝 Latest commit: $(git log -1 --oneline)"
+else
+    echo "❌ Deployment failed!"
+    pm2 logs enternship-enroll --lines 10
+    exit 1
+fi
