@@ -1,32 +1,40 @@
 #!/bin/bash
 
-# Configuration
+echo "🚀 Starting full deployment..."
+
 APP_DIR="/var/www/enternship-enroll"
-BRANCH="master"
+cd "$APP_DIR" || exit 1
 
-echo "🚀 Starting Deployment..."
+# 1. Pull ALL files from GitHub
+echo "📥 Pulling all files from GitHub..."
+git fetch origin
+git reset --hard origin/master
 
-# Navigate to app directory
-cd $APP_DIR || { echo "❌ Directory $APP_DIR not found"; exit 1; }
-
-# Pull latest changes
-echo "📥 Pulling latest changes from GitHub..."
-git fetch --all
-git checkout -B $BRANCH origin/$BRANCH
-git reset --hard origin/$BRANCH
-
-# Install dependencies (production only)
-echo "📦 Installing dependencies..."
-npm install --production
-
-# Restart application with PM2
-if command -v pm2 &> /dev/null; then
-    echo "♻️ Restarting application with PM2..."
-    pm2 restart enternship-enroll || pm2 start server/server.js --name enternship-enroll
-else
-    echo "⚠️ PM2 not found. Restarting with Node (not recommended for production)..."
-    pkill -f "node server/server.js"
-    nohup node server/server.js > server.log 2>&1 &
+# 2. Ensure public folder exists and has correct files
+echo "📁 Ensuring public folder is up to date..."
+if [ -d "public" ]; then
+    # Check if public folder is tracked in git
+    if git ls-tree --name-only HEAD | grep -q "^public/"; then
+        echo "✅ Public folder is tracked in git, pulling latest..."
+        git checkout origin/master -- public/
+    else
+        echo "⚠️ Public folder not in git, checking for updates..."
+        # If you have a frontend build process, add it here
+        # npm run build
+    fi
 fi
 
-echo "✅ Deployment Complete!"
+# 3. Install dependencies
+echo "📦 Installing dependencies..."
+npm ci --only=production --no-audit
+
+# 4. Restart app
+echo "♻️ Restarting application..."
+pm2 delete enternship-enroll 2>/dev/null || true
+pm2 start server/server.js --name enternship-enroll
+
+# 5. Verify
+sleep 2
+echo "✅ Deployment complete!"
+echo "📊 Status:"
+pm2 status enternship-enroll
