@@ -12,9 +12,7 @@ pm2 delete enternship-enroll 2>/dev/null || true
 
 # 2. Force sync with GitHub
 echo "🔄 Force syncing with GitHub..."
-git fetch origin --force
-git reset --hard origin/master
-git clean -fdx
+git fetch origin master
 
 # 3. Install dependencies
 echo "📦 Installing dependencies..."
