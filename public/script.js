@@ -1,0 +1,106 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Toggler ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    const THEME_KEY = 'aphezis-theme';
+
+    // 1. Check local storage or system preference
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        htmlElement.setAttribute('data-theme', savedTheme);
+    } else if (systemPrefersDark) {
+        htmlElement.setAttribute('data-theme', 'dark');
+    }
+
+    // 2. Toggle Logic
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem(THEME_KEY, newTheme);
+    });
+
+
+    // --- Form Submission ---
+    const form = document.getElementById('enrollment-form');
+    const submitBtn = form.querySelector('.submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+    const messageDiv = document.getElementById('form-message');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Reset UI
+        messageDiv.classList.add('hidden');
+        messageDiv.className = ''; // remove success/error classes
+        btnText.classList.add('hidden');
+        btnLoader.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        // Gather Data
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            interest: document.getElementById('interest').value,
+            resumeLink: document.getElementById('resumeLink').value
+        };
+
+        try {
+            const response = await fetch('/api/enroll', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Success State
+                messageDiv.textContent = result.message || 'Application submitted successfully!';
+                messageDiv.classList.add('success');
+                messageDiv.classList.remove('hidden');
+                form.reset();
+            } else {
+                // Error State (Server side)
+                throw new Error(result.message || 'Submission failed.');
+            }
+
+        } catch (error) {
+            console.error('Submission Error:', error);
+            messageDiv.textContent = error.message || 'Something went wrong. Please try again.';
+            messageDiv.classList.add('error');
+            messageDiv.classList.remove('hidden');
+        } finally {
+            // Restore Button
+            btnText.classList.remove('hidden');
+            btnLoader.classList.add('hidden');
+            submitBtn.disabled = false;
+        }
+    });
+
+    // --- Animations on Scroll (Simple Intersection Observer) ---
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-up').forEach(el => {
+        // el.style.animationPlayState = 'paused'; // Optional: if you want to wait for scroll
+        // observer.observe(el);
+    });
+});

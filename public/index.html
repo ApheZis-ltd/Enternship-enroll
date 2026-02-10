@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApheZis Tech - Internship Enrollment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <div class="background-mesh"></div>
+    
+    <nav class="glass-nav">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="ApheZis Tech Logo" class="logo">
+            <span class="brand-name">ApheZis Tech</span>
+        </div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1 class="animate-up">Accelerate Your Future<br><span class="gradient-text">With ApheZis Tech</span></h1>
+            <p class="subtitle animate-up delay-1">Join the elite internship program in Kigali. Build real-world solutions that matter.</p>
+            <div class="location-badge animate-up delay-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>24P7+C3V, Kigali (ADEPR Nyakabanda)</span>
+            </div>
+        </section>
+
+        <section class="enrollment-section animate-up delay-3">
+            <div class="glass-card">
+                <h2>Begin Your Journey</h2>
+                <form id="enrollment-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+250 788 000 000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest">Track of Interest</label>
+                        <select id="interest" name="interest" required>
+                            <option value="" disabled selected>Select your path</option>
+                            <option value="Software Development">Software Development</option>
+                            <option value="Data Science & AI">Data Science & AI</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                            <option value="Cloud Engineering">Cloud Engineering</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resumeLink">Portfolio / Resume Link</label>
+                        <input type="url" id="resumeLink" name="resumeLink" placeholder="https://linkedin.com/in/..." >
+                        <small>Please provide a link to your LinkedIn, GitHub, or online portfolio.</small>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Apply Now</span>
+                        <div class="btn-loader hidden"></div>
+                    </button>
+                    
+                    <div id="form-message" class="hidden"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ApheZis Tech. All rights reserved.</p>
+        <div class="socials">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
