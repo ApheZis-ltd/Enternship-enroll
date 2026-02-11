@@ -101,42 +101,92 @@
         </section>
 
         <section class="enrollment-section animate-up delay-3">
-        <div class="glass-card">
+            <div class="glass-card">
                 <h2>Begin Your Journey</h2>
                 <form id="enrollment-form">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+250 7XX XXX XXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="school">School</label>
+                            <input type="text" id="school" name="school" placeholder="University of Rwanda">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            <select id="level" name="level">
+                                <option value="" disabled selected>Select level</option>
+                                <option value="Level 4">Level 4</option>
+                                <option value="Level 5">Level 5</option>
+                                <option value="Undergraduate">Undergraduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startDate">Desired Starting Date *</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interest">Area of Study *</label>
+                            <select id="interest" name="interest" required>
+                                <option value="" disabled selected>Select area of study</option>
+                                <option value="Software Development">Software Development</option>
+                                <option value="Embedded System">Embedded System</option>
+                                <option value="Networking">Networking</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studyMode">Study Mode *</label>
+                            <select id="studyMode" name="studyMode" required>
+                                <option value="" disabled selected>Select mode</option>
+                                <option value="Online">Online</option>
+                                <option value="Offline">Offline</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="questionType">Question Type</label>
+                            <select id="questionType" name="questionType">
+                                <option value="" disabled selected>Select question type</option>
+                                <option value="Internship Inquiry">Internship Inquiry</option>
+                                <option value="Program Details">Program Details</option>
+                                <option value="Payment Options">Payment Options</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referral">Referral Code/Number</label>
+                            <input type="text" id="referral" name="referral" placeholder="Optional">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="resumeLink">Portfolio / Resume Link</label>
+                            <input type="url" id="resumeLink" name="resumeLink"
+                                placeholder="https://linkedin.com/in/...">
+                            <small>Link to LinkedIn, GitHub, or online portfolio.</small>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="john@example.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+250 788 000 000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="interest">Track of Interest</label>
-                        <select id="interest" name="interest" required>
-                            <option value="" disabled selected>Select your path</option>
-                            <option value="Software Development">Software Development</option>
-                            <option value="Data Science & AI">Data Science & AI</option>
-                            <option value="UI/UX Design">UI/UX Design</option>
-                            <option value="Cloud Engineering">Cloud Engineering</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="resumeLink">Portfolio / Resume Link</label>
-                        <input type="url" id="resumeLink" name="resumeLink" placeholder="https://linkedin.com/in/...">
-                        <small>Please provide a link to your LinkedIn, GitHub, or online portfolio.</small>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
+                    <button type="submit" class="submit-btn mt-4">
                         <span class="btn-text">Apply Now</span>
                         <div class="btn-loader hidden"></div>
                     </button>

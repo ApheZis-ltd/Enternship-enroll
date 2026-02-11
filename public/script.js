@@ -114,8 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
             fullName: document.getElementById('fullName').value,
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
+            school: document.getElementById('school').value,
+            level: document.getElementById('level').value,
+            startDate: document.getElementById('startDate').value,
             interest: document.getElementById('interest').value,
-            resumeLink: document.getElementById('resumeLink').value
+            studyMode: document.getElementById('studyMode').value,
+            questionType: document.getElementById('questionType').value,
+            resumeLink: document.getElementById('resumeLink').value,
+            referral: document.getElementById('referral').value
         };
 
         try {

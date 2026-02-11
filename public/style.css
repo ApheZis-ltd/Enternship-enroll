@@ -336,8 +336,32 @@ h1 {
 /* Form Section */
 .enrollment-section {
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
     padding: 0 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: span 1;
+    }
 }
 
 .glass-card {
