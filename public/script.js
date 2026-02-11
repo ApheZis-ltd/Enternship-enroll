@@ -23,6 +23,74 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(THEME_KEY, newTheme);
     });
 
+    // --- Mobile Menu ---
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = mobileMenuToggle.querySelector('.menu-icon');
+    const closeIcon = mobileMenuToggle.querySelector('.close-icon');
+
+    const toggleMenu = () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        if (isOpen) {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        } else {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    mobileMenuToggle.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.mobile-nav-item').forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+        });
+    });
+
+    // --- Scroll Spy ---
+    const navItems = document.querySelectorAll('.nav-item');
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    const sections = ['home', 'about', 'solutions', 'interns', 'contact'];
+
+    const updateActiveSection = () => {
+        const scrollPosition = window.scrollY + 100;
+
+        let currentSection = 'home';
+        for (const sectionId of sections) {
+            const element = document.getElementById(sectionId);
+            if (element && element.offsetTop <= scrollPosition) {
+                currentSection = sectionId;
+            }
+        }
+
+        // Update Nav Links
+        navItems.forEach(item => {
+            if (item.getAttribute('data-section') === currentSection) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        // Update Mobile Nav Links
+        mobileNavItems.forEach(item => {
+            if (item.getAttribute('data-section') === currentSection) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection(); // Initial check
+
 
     // --- Form Submission ---
     const form = document.getElementById('enrollment-form');
