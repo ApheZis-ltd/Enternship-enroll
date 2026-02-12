@@ -333,10 +333,201 @@ h1 {
     border: 1px solid var(--glass-border);
 }
 
+/* Premium Program Cards */
+.program-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 32px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color, var(--color-primary)), var(--color-accent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.program-card:hover::before {
+    opacity: 1;
+}
+
+.program-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px 0 rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.program-card.blue {
+    --accent-color: #3b82f6;
+}
+
+.program-card.purple {
+    --accent-color: #a855f7;
+}
+
+.program-card.green {
+    --accent-color: #10b981;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.program-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.card-icon.blue {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+.card-icon.purple {
+    background: linear-gradient(135deg, #a855f7, #c084fc);
+}
+
+.card-icon.green {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.card-description {
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.card-features {
+    list-style: none;
+    margin-bottom: 24px;
+}
+
+.card-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.card-features li i {
+    color: var(--accent-color, var(--color-primary));
+    flex-shrink: 0;
+}
+
+/* Premium Buttons */
+.btn {
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0. 2, 1);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-color, var(--color-primary)), var(--color-accent));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(var(--accent-color), 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--accent-color), 0.4);
+}
+
+.btn-primary.blue {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary.blue:hover {
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+}
+
+.btn-primary.purple {
+    background: linear-gradient(135deg, #a855f7, #c084fc);
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
+}
+
+.btn-primary.purple:hover {
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.5);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent-color, var(--color-primary));
+    color: var(--accent-color, var(--color-primary));
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: var(--accent-color, var(--color-primary));
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--accent-color), 0.3);
+}
+
+.btn-outline.green {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.btn-outline.green:hover {
+    background: #10b981;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.badge-secondary {
+    background: linear-gradient(135deg, rgba(64, 224, 255, 0.15), rgba(185, 167, 255, 0.15));
+    color: var(--color-primary);
+    border: 1px solid rgba(64, 224, 255, 0.3);
+}
+
 /* Form Section */
 .enrollment-section {
     width: 100%;
-    max-width: 800px;
     padding: 0 20px;
 }
 

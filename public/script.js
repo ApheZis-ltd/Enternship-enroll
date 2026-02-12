@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Lucide Icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
     // --- Theme Toggler ---
     const themeToggleBtn = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
@@ -10,8 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (savedTheme) {
         htmlElement.setAttribute('data-theme', savedTheme);
-    } else if (systemPrefersDark) {
-        htmlElement.setAttribute('data-theme', 'dark');
+        htmlElement.classList.toggle('dark', savedTheme === 'dark');
+    } else {
+        // Default to light regardless of system preference if no saved theme,
+        // or optionally use system preference. User asked for Light as default.
+        const defaultTheme = 'light';
+        htmlElement.setAttribute('data-theme', defaultTheme);
+        htmlElement.classList.toggle('dark', defaultTheme === 'dark');
     }
 
     // 2. Toggle Logic
@@ -20,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         htmlElement.setAttribute('data-theme', newTheme);
+        htmlElement.classList.toggle('dark', newTheme === 'dark');
         localStorage.setItem(THEME_KEY, newTheme);
     });
 
@@ -61,11 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateActiveSection = () => {
         const scrollPosition = window.scrollY + 100;
 
-        let currentSection = 'home';
-        for (const sectionId of sections) {
-            const element = document.getElementById(sectionId);
-            if (element && element.offsetTop <= scrollPosition) {
-                currentSection = sectionId;
+        let currentSection = 'interns';
+        if (window.scrollY > 50) {
+            for (const sectionId of sections) {
+                const element = document.getElementById(sectionId);
+                if (element && element.offsetTop <= scrollPosition) {
+                    currentSection = sectionId;
+                }
             }
         }
 
