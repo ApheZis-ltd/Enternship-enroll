@@ -109,22 +109,22 @@ document.addEventListener('DOMContentLoaded', () => {
         btnLoader.classList.remove('hidden');
         submitBtn.disabled = true;
 
-        // Gather Data
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            school: document.getElementById('school').value,
-            level: document.getElementById('level').value,
-            startDate: document.getElementById('startDate').value,
-            interest: document.getElementById('interest').value,
-            studyMode: document.getElementById('studyMode').value,
-            questionType: document.getElementById('questionType').value,
-            resumeLink: document.getElementById('resumeLink').value,
-            referral: document.getElementById('referral').value
-        };
-
         try {
+            // Gather Data Safely
+            const formData = {
+                fullName: document.getElementById('fullName')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                school: document.getElementById('school')?.value || '',
+                level: document.getElementById('level')?.value || '',
+                startDate: document.getElementById('startDate')?.value || '',
+                interest: document.getElementById('interest')?.value || '',
+                studyMode: document.getElementById('studyMode')?.value || '',
+                questionType: document.getElementById('questionType')?.value || '',
+                resumeLink: document.getElementById('resumeLink')?.value || '',
+                referral: document.getElementById('referral')?.value || ''
+            };
+
             const response = await fetch('/api/enroll', {
                 method: 'POST',
                 headers: {
